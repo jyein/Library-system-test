@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.korit.library.repository.AccountRepository">
+    <resultMap id="userMst" type="com.korit.library.entity.UserMst">
+        <result property="userId" column="user_id"></result>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="name" column="name"></result>
+        <result property="email" column="email"></result>
+        <result property="createDate" column="create_date"></result>
+        <result property="updateDate" column="update_date"></result>
+        <!--    property= "dto안에 들어있는 변수명" colum= "db 에있는 컬럼명"    -->
+
+        <collection property="roleDtl" javaType="list" resultMap="roleDtl"></collection>
+        <!--    조인된 부분을 resultMap로 가져왓을때 list로 만들어라    -->
+    </resultMap>
+
+    <resultMap id="roleMst" type="com.korit.library.entity.RoleMst">
+        <result property="roleId" column="role_id"></result>
+        <result property="roleName" column="role_name"></result>
+        <result property="createDate" column="create_date"></result>
+        <result property="updateDate" column="update_date"></result>
+    </resultMap>
+
+    <resultMap id="roleDtl" type="com.korit.library.entity.RoleDtl">
+        <result property="roleDtlId" column="role_dtl_id"></result>
+        <result property="userId" column="user_id"></result>
+        <result property="roleId" column="role_id"></result>
+        <result property="createDate" column="create_date"></result>
+        <result property="updateDate" column="update_date"></result>
+        <collection property="roleMst" resultMap="roleMst"></collection>
+    </resultMap>
+
+<!--  join 한 결과를 가져와야하는 경우에는 resultMap을 사용한다  -->
+    <select id="findUserByUsername" parameterType="string" resultMap="userMst">
+        select
+            um.user_id,
+            um.username,
+            um.password,
+            um.name,
+            um.email,
+
+            rd.role_id,
+            rm.role_name,
+
+            um.create_date,
+            um.update_date
+        from
+            user_mst um
+            left outer join role_dtl rd on(rd.user_id = um.user_id)
+            left outer join role_mst rm on(rm.role_id = rd.role_id)
+        where
+            um.username = #{username}
+    </select>
+    <select id="findUserByUserId" parameterType="integer" resultMap="userMst">
+        select
+        um.user_id,
+        um.username,
+        um.password,
+        um.name,
+        um.email,
+
+        rd.role_id,
+        rm.role_name,
+
+        um.create_date,
+        um.update_date
+        from
+        user_mst um
+        left outer join role_dtl rd on(rd.user_id = um.user_id)
+        left outer join role_mst rm on(rm.role_id = rd.role_id)
+        where
+        um.user_id = #{userId}
+    </select>
+
+
+    <insert id="saveUser" parameterType="com.korit.library.entity.UserMst"
+            useGeneratedKeys="true"
+            keyProperty="userId">
+
+        insert into user_mst
+        values (0, #{username}, #{password}, #{name}, #{email}, now(), now())
+    </insert>
+
+    <!--  여기 아래에서 UserDto는 위의 saveUser에 UserDto가 생성된후에 실행 가능함  -->
+    <insert id="saveRole" parameterType="com.korit.library.entity.UserMst">
+        insert into role_dtl
+        values (0, #{userId}, 1, now(), now())
+    </insert>
+</mapper>

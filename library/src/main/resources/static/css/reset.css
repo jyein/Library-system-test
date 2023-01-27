@@ -1,0 +1,64 @@
+/* css 초기값 설정 */
+/* 쓸대없는것들을 다같이 날리는걸 rest.css라 한다. */
+
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+p,
+pre,
+a,
+b,
+i,
+ol,
+ul,
+li,
+form,
+label,
+table,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+footer,
+header,
+nav,
+main {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    line-height: 1;
+    height: 100%;
+}
+
+ol,
+ul,
+li {
+    list-style-type: none;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0; /* border-spacing = 보더 사이들의 간격 */
+}
+
+input, textarea, select {
+    box-sizing: border-box;
+}

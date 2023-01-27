@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+/* 글꼴 https://noonnu.cc/font_page/845 */
+
+* {
+    font-family: 'SUIT-Regular';
+    font-size: 14px;
+}
+
+body {
+    height: 100%;
+    background-image: url(/static/images/main_background.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    /* background-attachment: fixed; = 스크롤을 내리더라도 이미지 고정 */
+}
+
+#container {
+    margin: 0 auto;
+    width: 1400px;
+}
+
+
+input, select, textarea, table, th, td {
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+}
+
+input, textarea {
+    outline: none;
+}
+
+input, textarea, select {
+    padding: 5px;
+    cursor: pointer;
+}
+
+button {
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: white;
+    cursor: pointer;
+}
+
+button:hover {
+        background-color: #fafafa;
+        color: #3e3e3e;
+}
