@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = {"관리자 도서관리 API"})
 @RequestMapping("/api/admin")
@@ -27,6 +29,13 @@ public class BookApi {
 
     @Autowired
     private BookService bookService;
+
+    @GetMapping("/book/{bookCode}")
+    public ResponseEntity<CMRestDto<Map<String, Object>>> getBook(@PathVariable String bookCode) {
+
+        return ResponseEntity.ok()
+                .body(new CMRestDto<>(HttpStatus.OK.value(), "Successfully", bookService.getBookAndImg(bookCode)));
+    }
 
     @ParamsAspect
     @ValidAspect
@@ -114,6 +123,17 @@ public class BookApi {
         return ResponseEntity.ok()
                 .body(new CMRestDto<>(HttpStatus.OK.value(), "Successfully", true));
     }
+
+    @ParamsAspect
+    @PostMapping("/book/{bookCode}/images/modification")
+    // 파일 객체를 가지고온다
+    public ResponseEntity<CMRestDto<?>> modifyBookImg(@PathVariable String bookCode, @ApiParam(required = false) @RequestPart List<MultipartFile> files) {
+        bookService.registerBookImages(bookCode, files);
+
+        return ResponseEntity.ok()
+                .body(new CMRestDto<>(HttpStatus.OK.value(), "Successfully", true));
+    }
+    // 이거는 delete랑 register를 합쳐둔 기능으로 설계해보자
 
     @ParamsAspect
     @GetMapping("/book/{bookCode}/images")

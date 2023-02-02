@@ -27,6 +27,14 @@ public class BookService {
     private String filePath;
     // yml에 성정해둿던 경로를 여기로 가져오라는 의미
 
+    public Map<String, Object> getBookAndImg(String bookCode) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("bookMst", bookRepository.findBookByBookCode(bookCode));
+        result.put("bookImage", bookRepository.findBookImageByBookCode(bookCode));
+
+        return result;
+    }
+
     @Autowired
     private BookRepository bookRepository;
 

@@ -43,4 +43,5 @@ public interface BookRepository {
     public List<BookImage> findBookImageAll(String bookCode);
     public int deleteBookImage(int imageId);
     public BookImage findBookImageByImageId(int imageId);
+    public BookImage findBookImageByBookCode(String bookCode);
 }
