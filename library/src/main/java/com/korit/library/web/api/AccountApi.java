@@ -64,9 +64,11 @@ public class AccountApi {
     @GetMapping("/principal")
     public ResponseEntity<CMRestDto<? extends PrincipalDetails>> getPrincipalDetails(@ApiParam(name = "principalDetails", hidden = true) @AuthenticationPrincipal PrincipalDetails principalDetails) {
 
-        principalDetails.getAuthorities().forEach(role -> {
-            log.info("로그인된 사용자의 권한: {}", role.getAuthority());
-        });
+        if (principalDetails != null) {
+            principalDetails.getAuthorities().forEach(role -> {
+                log.info("로그인된 사용자의 권한: {}", role.getAuthority());
+            });
+        }
 
         return ResponseEntity.ok()
                 .body(new CMRestDto<>(HttpStatus.OK.value(), "Success", principalDetails));

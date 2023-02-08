@@ -37,11 +37,12 @@ main {
     box-sizing: border-box;
 }
 
-html,
-body {
+html{
     line-height: 1;
     height: 100%;
 }
+
+
 
 ol,
 ul,

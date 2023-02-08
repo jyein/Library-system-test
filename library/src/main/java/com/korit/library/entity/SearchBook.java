@@ -1,8 +1,15 @@
 package com.korit.library.entity;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class SearchBook {
     private int bookId;
     private String bookCode;
@@ -15,5 +22,6 @@ public class SearchBook {
     private int rentalDtlId;
     private LocalDate returnDate;
     private int userId;
+    private int likeId;
     private int likeCount;
 }

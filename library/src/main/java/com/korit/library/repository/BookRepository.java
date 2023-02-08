@@ -30,6 +30,7 @@ public interface BookRepository {
      */
 
     public int getBookTotalCount(SearchNumberListReqDto searchNumberListReqDto);
+
     public List<BookMst> searchBook(SearchReqDto searchReqDto);
     public BookMst findBookByBookCode(String bookCode);
     public List<CategoryView> findAllCategory();
@@ -37,7 +38,6 @@ public interface BookRepository {
     public int updateBookByBookCode(BookReqDto bookReqDto);
     public int maintainUpdateBookByBookCode(BookReqDto bookReqDto);
     public int deleteBook(String bookCode);
-
     public int deleteBooks(List<Integer> bookIds);
     public int registerBookImages(List<BookImage> bookImages);
     public List<BookImage> findBookImageAll(String bookCode);
