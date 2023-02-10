@@ -10,6 +10,7 @@
         <result property="password" column="password"></result>
         <result property="name" column="name"></result>
         <result property="email" column="email"></result>
+        <result property="provider" column="provider"></result>
         <result property="createDate" column="create_date"></result>
         <result property="updateDate" column="update_date"></result>
         <!--    property= "dto안에 들어있는 변수명" colum= "db 에있는 컬럼명"    -->
@@ -42,6 +43,7 @@
             um.password,
             um.name,
             um.email,
+            um.provider,
 
             rd.role_id,
             rm.role_name,
@@ -62,6 +64,7 @@
         um.password,
         um.name,
         um.email,
+        um.provider,
 
         rd.role_id,
         rm.role_name,
@@ -82,7 +85,7 @@
             keyProperty="userId">
 
         insert into user_mst
-        values (0, #{username}, #{password}, #{name}, #{email}, now(), now())
+        values (0, #{username}, #{password}, #{name}, #{email}, #{provider}, now(), now())
     </insert>
 
     <!--  여기 아래에서 UserDto는 위의 saveUser에 UserDto가 생성된후에 실행 가능함  -->
@@ -90,4 +93,13 @@
         insert into role_dtl
         values (0, #{userId}, 1, now(), now())
     </insert>
+
+    <update id="setUserProvider" parameterType="com.korit.library.entity.UserMst">
+        update
+            user_mst
+        set
+            provider = #{provider}
+        where
+            user_id = #{userId}
+    </update>
 </mapper>

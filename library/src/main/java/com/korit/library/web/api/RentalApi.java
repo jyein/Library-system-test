@@ -43,7 +43,7 @@ public class RentalApi {
 
         rentalService.rentalOne(principalDetails.getUser().getUserId(), bookId);
         return ResponseEntity.ok()
-                .body(new CMRestDto<>(HttpStatus.OK.value(), "Successfuly", null));
+                .body(new CMRestDto<>(HttpStatus.OK.value(), "Successfully", true));
     }
 
     @PutMapping("/rental/{bookId}")
@@ -51,7 +51,7 @@ public class RentalApi {
         rentalService.returnBook(bookId);
 
         return ResponseEntity.ok()
-                .body(new CMRestDto<>(HttpStatus.OK.value(), "Successfuly", null));
+                .body(new CMRestDto<>(HttpStatus.OK.value(), "Successfully", true));
     }
 
 

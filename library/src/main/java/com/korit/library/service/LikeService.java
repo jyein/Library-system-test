@@ -43,7 +43,7 @@ public class LikeService {
             throw new CustomLikeException(errorMap);
         }
 
-        likeRepository.addLike(bookLike);
+        likeRepository.deleteLike(bookLike);
         return likeRepository.getLikeCount(bookId);
     }
 

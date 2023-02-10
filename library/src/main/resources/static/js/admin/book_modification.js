@@ -47,7 +47,7 @@ class BookModificationApi {
         $.ajax({
             async: false,
             type: "get",
-            url: `http://127.0.0.1:8000/api/admin/book/${bookObj.bookCode}`,
+            url: `http://localhost:8000/api/admin/book/${bookObj.bookCode}`,
             dataType: "json",
             success: response => {
                 responseData = response.data;
@@ -66,7 +66,7 @@ class BookModificationApi {
         $.ajax({
             async: false,
             type: "get",
-            url: "http://127.0.0.1:8000/api/admin/categories",
+            url: "http://localhost:8000/api/admin/categories",
             dataType: "json",
             success: response => {
                 responseData = response.data;
@@ -85,7 +85,7 @@ class BookModificationApi {
         $.ajax({
             async: false,
             type: "put",
-            url: `http://127.0.0.1:8000/api/admin/book/${bookObj.bookCode}`,
+            url: `http://localhost:8000/api/admin/book/${bookObj.bookCode}`,
             contentType: "application/json", // 데이터를 json으로 보내줄것이기 때문
             data: JSON.stringify(bookObj),
             dataType: "json",
@@ -106,7 +106,7 @@ class BookModificationApi {
         $.ajax({
             async: false,
             type: "delete",
-            url: `http://127.0.0.1:8000/api/admin/book/${bookObj.bookCode}/image/${imgObj.imageId}`,
+            url: `http://localhost:8000/api/admin/book/${bookObj.bookCode}/image/${imgObj.imageId}`,
             dataType: "json",
             success: response => {
                 successFlag = true;
@@ -124,7 +124,7 @@ class BookModificationApi {
         $.ajax({
             async: false,
             type: "post",
-            url: `http://127.0.0.1:8000/api/admin/book/${bookObj.bookCode}/images`,
+            url: `http://localhost:8000/api/admin/book/${bookObj.bookCode}/images`,
             encType: "multipart/form-data",
             contentType: false,
             processData: false,
@@ -196,7 +196,7 @@ class BookModificationService {
             imgObj.orginName = responseData.bookImage.orginName;
 
             const bookImg = document.querySelector(".book-img");
-            bookImg.src = `http://127.0.0.1:8000/image/book/${responseData.bookImage.saveName}`;
+            bookImg.src = `http://localhost:8000/image/book/${responseData.bookImage.saveName}`;
         }
     }
 
